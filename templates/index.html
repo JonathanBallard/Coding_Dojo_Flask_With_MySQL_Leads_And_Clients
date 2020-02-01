@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script defer src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script defer src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <title>Leads & Clients</title>
+
+    <script>
+        window.onload = function () {
+            
+        
+        
+        var options = {
+            title: {
+                text: "Number of Leads per Person"
+            },
+            subtitles: [{
+                text: "Total number of leads"
+            }],
+            animationEnabled: true,
+            data: [{
+                type: "pie",
+                startAngle: 40,
+                toolTipContent: "<b>{label}</b>: {y}",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}",
+
+                
+                    
+
+                
+
+
+                dataPoints: [
+                    { y: "{{ tableLeads[0]['countLeads'] }}", label: "{{ tableLeads[0]['fullName'] }}" },
+                    { y: "{{ tableLeads[1]['countLeads'] }}", label: "{{ tableLeads[1]['fullName'] }}" },
+                    { y: "{{ tableLeads[2]['countLeads'] }}", label: "{{ tableLeads[2]['fullName'] }}" },
+                    { y: "{{ tableLeads[3]['countLeads'] }}", label: "{{ tableLeads[3]['fullName'] }}" },
+                    { y: "{{ tableLeads[4]['countLeads'] }}", label: "{{ tableLeads[4]['fullName'] }}" },
+                    { y: "{{ tableLeads[5]['countLeads'] }}", label: "{{ tableLeads[5]['fullName'] }}" },
+                    { y: "{{ tableLeads[6]['countLeads'] }}", label: "{{ tableLeads[6]['fullName'] }}" },
+                    { y: "{{ tableLeads[7]['countLeads'] }}", label: "{{ tableLeads[7]['fullName'] }}" }
+                ]
+        
+                
+
+                
+            }]
+        };
+        $("#chartContainer").CanvasJSChart(options);
+        
+        }
+        </script>
+
+
+
+
+</head>
+<body>
+
+    <div class="wrapper container">
+        <h1>Leads & Clients</h1>
+
+
+
+        <h4>List of Customers & Number of Leads</h4>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Number of Leads</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lead in tableLeads %}
+                <tr>
+                    <td>{{ lead['fullName'] }}</td>
+                    <td>{{ lead['countLeads'] }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        
+
+
+
+
+    </div>
+
+
+
+
+</body>
+</html>
